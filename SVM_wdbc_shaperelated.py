@@ -8,13 +8,14 @@ Created on Mon Jan  2 22:10:55 2023
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Load the dataset into a Pandas DataFrame
 df = pd.read_csv('/Users/tajul/Documents/MHIA/HIA 303/Project/wdbc.data', header=None)
 
 # Split the dataset into input features (X) and target label (y)
 #Select compactness, concavity, concave points, symmetry, and fractal dimension 
-X = df.iloc[:, [6, 7, 8, 13, 27]]
+X = df.iloc[:, 7:]
 y = df.iloc[:, 1]
 
 # Encode the target label as a binary class
@@ -42,23 +43,14 @@ model.fit(X_train, y_train)
 accuracy = model.score(X_test, y_test)
 print(f'Test accuracy: {accuracy:.2f}')
 
-# Select the first two features
-X_plot = X.iloc[:, :2]
+# Select features from column 7 onwards
+X_plot = X.iloc[:, 7:]
 
 # Create a scatter plot of the data
-colors = ['blue', 'red']
-for label, color in zip((0, 1), colors):
-    mask = y == label
-    plt.scatter(X_plot.iloc[:, 0][mask], X_plot.iloc[:, 1][mask], c=color, label=['Benign', 'Malignant'][label])
 
-# Add a legend to the plot
-plt.legend()
+sns.scatterplot(x=X_plot.iloc[:, 0], y=X_plot.iloc[:, 1], hue=y)
+plt.legend(labels=['Malignant','Benign'])
 
-# Set the x-axis label
-plt.xlabel('Shape related features::compactness, concavity, concave points, symmetry and fractal dimension')
-
-# Set the y-axis label
+plt.xlabel('Shape related features: compactness, concavity, concave points and fractal dimensions')
 plt.ylabel('Diagnosis')
-
-# Show the plot
 plt.show()

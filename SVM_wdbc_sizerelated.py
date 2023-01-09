@@ -8,6 +8,7 @@ Created on Mon Jan  2 22:10:55 2023
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Load the dataset into a Pandas DataFrame
 df = pd.read_csv('/Users/tajul/Documents/MHIA/HIA 303/Project/wdbc.data', header=None)
@@ -42,23 +43,15 @@ model.fit(X_train, y_train)
 accuracy = model.score(X_test, y_test)
 print(f'Test accuracy: {accuracy:.2f}')
 
-# Select the first two features
-X_plot = X.iloc[:, :2]
+# Select first 6 columns; radius,perimeter,texture,area
+X_plot = X.iloc[:, :6]
 
-# Create a scatter plot of the data
-colors = ['blue', 'red']
-for label, color in zip((0, 1), colors):
-    mask = y == label
-    plt.scatter(X_plot.iloc[:, 0][mask], X_plot.iloc[:, 1][mask], c=color, label=['Benign', 'Malignant'][label])
+sns.scatterplot(x=X_plot.iloc[:, 0], y=X_plot.iloc[:, 1], hue=y)
 
-# Add a legend to the plot
-plt.legend()
+plt.legend(labels=['Malignant','Benign'])
 
-# Set the x-axis label
-plt.xlabel('Size related features: radius,perimeter and area')
-
-# Set the y-axis label
+plt.xlabel('Size related features: radius,texture,perimeter and area')
 plt.ylabel('Diagnosis')
-
-# Show the plot
 plt.show()
+
+
