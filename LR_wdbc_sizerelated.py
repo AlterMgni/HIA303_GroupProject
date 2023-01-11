@@ -7,6 +7,10 @@ Created on Wed Jan 11 16:20:04 2023
 """
 
 import pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import confusion_matrix
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -14,19 +18,15 @@ import seaborn as sns
 df = pd.read_csv('/Users/tajul/Documents/MHIA/HIA 303/Project/wdbc.data', header=None)
 
 # Split the dataset into input features (X) and target label (y)
-#Select radius,perimeter and area  
+#Select radius,perimeter and area
 X = df.iloc[:, [2,3,4]]
 y = df.iloc[:, 1]
 
 # Encode the target label as a binary class
 y = (y == 'M').astype(int)
 
-from sklearn.model_selection import train_test_split
-
 # Split the dataset into training and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-from sklearn.preprocessing import StandardScaler
 
 # Standardize the input features
 scaler = StandardScaler()
@@ -34,8 +34,6 @@ X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
 # Build the logistic regression model
-from sklearn.linear_model import LogisticRegression
-
 model = LogisticRegression()
 model.fit(X_train, y_train)
 
@@ -43,14 +41,41 @@ model.fit(X_train, y_train)
 accuracy = model.score(X_test, y_test)
 print(f'Test accuracy: {accuracy:.2f}')
 
+# Generate predictions for the test set
+y_pred = model.predict(X_test)
+
+# Create a confusion matrix
+confusion_mat = confusion_matrix(y_test, y_pred)
+
+# Print the confusion matrix
+print(confusion_mat)
+
+# Plot the confusion matrix
+sns.heatmap(confusion_mat, annot=True, fmt="d", cmap=plt.cm.Blues)
+plt.title("Confusion Matrix")
+plt.xlabel("Predicted")
+plt.ylabel("True")
+plt.show()
 
 # Select features from column 7 onwards
 X_plot = X.iloc[:, :6]
 
 # Create a scatter plot of the data
-
 sns.scatterplot(x=X_plot.iloc[:, 0], y=X_plot.iloc[:, 1], hue=y)
 plt.legend(labels=['Malignant','Benign'])
 plt.xlabel('Size related features: radius,perimeter and area')
 plt.ylabel('Diagnosis')
 plt.show()
+
+#find the sensitivity and specificity
+tp = confusion_mat[0][0]
+fp = confusion_mat[0][1]
+fn = confusion_mat[1][0]
+tn = confusion_mat[1][1]
+
+sensitivity = tp / (tp + fn)
+specificity = tn / (tn + fp)
+
+print(f'Sensitivity: {sensitivity:.2f}')
+print(f'Specificity: {specificity:.2f}')
+
