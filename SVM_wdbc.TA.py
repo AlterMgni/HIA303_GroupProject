@@ -57,9 +57,6 @@ plt.ylabel('True Label')
 plt.xlabel('Predicted Label')
 plt.title('Confusion Matrix')
 
-# Select the first ten features
-X_plot = X.iloc[:, :11]
-
 #Add a title to the plot
 plt.title('Confusion Matrix')
 plt.show()

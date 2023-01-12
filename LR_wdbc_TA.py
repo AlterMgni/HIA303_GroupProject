@@ -27,7 +27,7 @@ y = df.iloc[:, 1]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # Create a logistic regression model
-model = LogisticRegression(penalty='l2', dual=False)
+model = LogisticRegression(penalty='l2', dual=False, max_iter=1000)
 
 # Train the model on the training set
 model.fit(X_train, y_train)
@@ -43,20 +43,21 @@ print(f'Model accuracy: {accuracy:.2f}')
 conf_matrix = confusion_matrix(y_test, y_pred)
 print(classification_report(y_test, y_pred))
 
+# Calculate sensitivity (true positive rate)
+sensitivity = conf_matrix[1, 1] / (conf_matrix[1, 0] + conf_matrix[1, 1])
+print(f'Sensitivity : {sensitivity:.2f}')
+
+# Calculate specificity (true negative rate)
+specificity = conf_matrix[0, 0] / (conf_matrix[0, 1] + conf_matrix[0, 0])
+print(f'Specificity : {specificity:.2f}')
+
 # Visualize the confusion matrix using seaborn
 sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
 plt.ylabel('True Label')
 plt.xlabel('Predicted Label')
 plt.title('Confusion Matrix')
 
-# Select the first two features
-X_plot = X.iloc[:, :11]
-
-#Create a scatter plot of the data
-plt.scatter(X_plot.iloc[:, 0], X_plot.iloc[:, 1], c=y, cmap='RdBu')
-plt.xlabel('features')
-plt.ylabel('diagnosis')
 
 #Add a title to the plot
-plt.title('Scatter Plot of Breast Cancer Data')
+plt.title('Confusion Matrix')
 plt.show()
