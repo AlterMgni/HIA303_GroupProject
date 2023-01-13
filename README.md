@@ -1,7 +1,7 @@
 # HIA303_GroupProject
 Repository for HIA303 Group Project.
 
-# Read me for for KNN, Random Forest, Decision Tree, Naive Nayes dy Dr Irfan
+# Read me for for KNN, Random Forest, Decision Tree, Naive Nayes by Dr Irfan
 
 df1= breast wisconsin data after drop ID numbre
 df2= breast wiconsin data after cleaning subject to trainin and test
