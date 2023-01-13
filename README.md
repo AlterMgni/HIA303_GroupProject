@@ -1,6 +1,13 @@
 # HIA303_GroupProject
 Repository for HIA303 Group Project.
 
+# Read me for Data Preparation, Descriptive Analysis and Feature Selection by Dr. Dura
+wdbc_csv = wdbc.data in .csv format
+df = pandas dataframe with attribute names in csv format
+df1 = pandas dataframe for wdbc.csv without ID and Diagnosis attributes 
+dataset = numpy array for pandas dataframe (df)
+
+
 # Read me for for KNN, Random Forest, Decision Tree, Naive Nayes by Dr Irfan
 
 df1= breast wisconsin data after drop ID numbre
