@@ -14,12 +14,12 @@ The present repository concentrates on several supervised machine learning techn
 This folder contains files retrieved from https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)
 
 Of importance:
-- _unformatted-data_ – original, unformatted database in a different arrangement than that of breast-cancer-wisconsin.data\
-- _breast-cancer-wisconsin.data_ – breast cancer database procured from the University of Wisconsin Hospitals, Madison\
-- _breast-cancer-wisconsin.names_ – supplementary names file for breast-cancer-wisconsin.data detailing its 11 attributes and accompanying domains\
-- _wdbc.data_ – the Wisconsin Diagnostic Breast Cancer (WPBC) database\
-- _wdbc.names_ – supplementary names file for wpbc.data detailing 32 attributes, including ID, diagnosis, and 30 real-valued input features with focus on diagnosis. Two types of diagnosis are set for its predicting field which are B = benign, and M = malignant\
-- _wpbc.data_ – the Wisconsin Prognostic Breast Cancer (WPBC) database\
+- _unformatted-data_ – original, unformatted database in a different arrangement than that of breast-cancer-wisconsin.data
+- _breast-cancer-wisconsin.data_ – breast cancer database procured from the University of Wisconsin Hospitals, Madison
+- _breast-cancer-wisconsin.names_ – supplementary names file for breast-cancer-wisconsin.data detailing its 11 attributes and accompanying domains
+- _wdbc.data_ – the Wisconsin Diagnostic Breast Cancer (WPBC) database
+- _wdbc.names_ – supplementary names file for wpbc.data detailing 32 attributes, including ID, diagnosis, and 30 real-valued input features with focus on diagnosis. Two types of diagnosis are set for its predicting field which are B = benign, and M = malignant
+- _wpbc.data_ – the Wisconsin Prognostic Breast Cancer (WPBC) database
 - _wpbc.names_ – supplementary names file for wpbc.data detailing 34 attributes, including ID, outcome, and 32 real-valued input features with focus on prognosis. Two types of outcomes are set for its predicting field which are R = recurrent, and N = nonrecurrent
 
 # Machine Learning
