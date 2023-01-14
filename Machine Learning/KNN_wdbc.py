@@ -58,7 +58,7 @@ for train_index, test_index in loo.split(X):
     y_test = y[test_index]
 
     # Create KNN Classifier
-    knn = KNeighborsClassifier(n_neighbors=3)
+    knn = KNeighborsClassifier(n_neighbors=5)
     # Train the model using the training sets
     knn.fit(X_train, y_train)
 
@@ -75,12 +75,7 @@ for train_index, test_index in loo.split(X):
 
     probabilities[test_index] = probability
 
-    # report classification results
-    #agreement = (predictions == y).sum()
-    #accuracy = agreement / y.shape[0]
-    #accuracies[count] = accuracy
-    #count = count + 1
-    #print("k={0},The leave-one-out accuracy is: {1:.4f}".format(k, accuracy))
+
 
 print(classification_report(y, predictions))
 
