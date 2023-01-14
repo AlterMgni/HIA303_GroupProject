@@ -50,32 +50,32 @@ accuracies = np.zeros(len(k_range))
 count = 0
 
 #loop from 1 to 40 with interval of 2 (off numbers only)
+for k in k_range:
+    for train_index, test_index in loo.split(X):
+        X_train = X[train_index, :]
+        y_train = y[train_index]
+        X_test = X[test_index, :]
 
-for train_index, test_index in loo.split(X):
-    X_train = X[train_index, :]
-    y_train = y[train_index]
-    X_test = X[test_index, :]
-    y_test = y[test_index]
+        # Create KNN Classifier
+        knn = KNeighborsClassifier(n_neighbors=k)
+        # Train the model using the training sets
+        knn.fit(X_train, y_train)
 
-    # Create KNN Classifier
-    knn = KNeighborsClassifier(n_neighbors=5)
-    # Train the model using the training sets
-    knn.fit(X_train, y_train)
+        # get prediction and probabiliy
+        prediction = knn.predict(X_test)
+        probability = knn.predict_proba(X_test)
 
-    # get prediction
-    prediction = knn.predict(X_test)
-
-    # write to append predictions array
-    predictions[test_index] = prediction
-
-    # get probability
-    probability = knn.predict_proba(X_test)
-
-    # write to append predictions and probabilities array
-
-    probabilities[test_index] = probability
+        # write to append predictions array
+        predictions[test_index] = prediction
+        probabilities[test_index] = probability
 
 
+# report classification results
+agreement = (predictions == y).sum()
+accuracy = agreement / y.shape[0]
+print("k={0},The leave-one-out accuracy is: {1:.4f}".format(k, accuracy))
+accuracies[count] = accuracy
+count = count + 1
 
 print(classification_report(y, predictions))
 
