@@ -78,7 +78,7 @@ plt.plot(fpr, tpr, label='AUC = {:.2f}'.format(auc))
 plt.xlabel('False Positive Rate')
 plt.ylabel('True Positive Rate')
 plt.legend(loc='lower right')
-plt.title('ROC Curve')
+plt.title('ROC Curve for SVM')
 plt.show()
 
 
