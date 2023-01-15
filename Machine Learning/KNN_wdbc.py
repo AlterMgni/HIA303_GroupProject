@@ -77,7 +77,6 @@ print("k={0},The leave-one-out accuracy is: {1:.4f}".format(k, accuracy))
 accuracies[count] = accuracy
 count = count + 1
 
-
 print(classification_report(y, predictions))
 
 #second method to calculate accuracy
