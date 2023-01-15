@@ -77,8 +77,8 @@ print("k={0},The leave-one-out accuracy is: {1:.4f}".format(k, accuracy))
 accuracies[count] = accuracy
 count = count + 1
 
-print(classification_report(y, predictions))
 
+print(classification_report(y, predictions))
 
 #second method to calculate accuracy
 from sklearn.metrics import accuracy_score,confusion_matrix,roc_auc_score,roc_curve
