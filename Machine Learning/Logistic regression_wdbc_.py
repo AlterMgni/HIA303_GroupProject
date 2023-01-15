@@ -61,3 +61,18 @@ plt.title('Confusion Matrix')
 #Add a title to the plot
 plt.title('Confusion Matrix')
 plt.show()
+
+from sklearn.metrics import roc_auc_score
+
+# Make predictions on the test set
+y_pred_proba = model.predict_proba(X_test)[:, 1]
+
+# Calculate the AUC
+auc = roc_auc_score(y_test, y_pred_proba)
+print(f'AUC: {auc:.2f}')
+
+from sklearn.metrics import roc_curve, auc
+fpr, tpr, thresholds = roc_curve(y_test, y_pred_proba)
+roc_auc = auc(fpr, tpr)
+plt.plot(fpr, tpr, lw=1, alpha=0.3, label='ROC (AUC = %0.2f)' % (roc_auc))
+
