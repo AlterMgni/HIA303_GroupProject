@@ -27,7 +27,7 @@ y = df.iloc[:, 1]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # Create a SVM model
-model = SVC(kernel='linear', C=1)
+model = SVC(kernel='linear', C=1, probability=True)
 
 # Train the model on the training set
 model.fit(X_train, y_train)
@@ -60,4 +60,25 @@ plt.title('Confusion Matrix')
 #Add a title to the plot
 plt.title('Confusion Matrix')
 plt.show()
+
+from sklearn.metrics import roc_auc_score, roc_curve
+
+# Get predicted probabilities of positive class
+y_pred_proba = model.predict_proba(X_test)[:, 1]
+
+# Calculate AUC
+auc = roc_auc_score(y_test, y_pred_proba)
+print(f'AUC: {auc:.2f}')
+
+# Get the false positive rate, true positive rate and thresholds
+fpr, tpr, thresholds = roc_curve(y_test, y_pred_proba)
+
+# Plot the ROC curve
+plt.plot(fpr, tpr, label='AUC = {:.2f}'.format(auc))
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.legend(loc='lower right')
+plt.title('ROC Curve for SVM')
+plt.show()
+
 
